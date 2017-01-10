@@ -8,40 +8,58 @@
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Font-Awesome CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
 <body>
+    <div class="top1">
+        <button type="input" class="btn btn-sm btn-default" id="one">Enregistrer</button>
+        <div class="bgColor">
+            <span class="label label-default" id="one">Couleur background</span>
+            <button type="input" class="btn btn-xs btn-default" value="white" id="bgcolor">Blanc</button>
+            <button type="input" class="btn btn-xs" value="black" id="bgcolor">Noir</button>
+            <button type="input" class="btn btn-xs btn-primary" value="blue" id="bgcolor">Bleu</button>
+            <button type="input" class="btn btn-xs btn-success" value="green" id="bgcolor">Vert</button>
+            <button type="input" class="btn btn-xs btn-warning" value="orange" id="bgcolor">Orange</button>
+            <button type="input" class="btn btn-xs btn-danger" value="red" id="bgcolor">Rouge</button>
+        </div>
+    </div>
+    <div class="top2">
+        <span class="label label-default" id="one">Couleur pinceau</span>
+        <button type="input" class="btn btn-xs btn-default" value="white" id="color">Blanc</button>
+        <button type="input" class="btn btn-xs" value="black" id="color">Noir</button>
+        <button type="input" class="btn btn-xs btn-primary" value="blue" id="color">Bleu</button>
+        <button type="input" class="btn btn-xs btn-success" value="green" id="color">Vert</button>
+        <button type="input" class="btn btn-xs btn-warning" value="orange" id="color">Orange</button>
+        <button type="input" class="btn btn-xs btn-danger" value="red" id="color">Rouge</button>
+    </div>
+    <div class="top3">
+        <span class="label label-default" id="one">Taille pinceau</span>
+        <button type="input" class="btn btn-xs btn-default" value="1" id="taille">Petit</button>
+        <button type="input" class="btn btn-xs btn-default" value="5" id="taille">Moyen</button>
+        <button type="input" class="btn btn-xs btn-default" value="9" id="taille">Gros</button>
+        <button type="input" class="btn btn-xs btn-default" value="15" id="taille">Enorme</button>
 
-    <button type="input" class="btn btn-sm btn-default" value="Enregistrer" id="one">Enregistrer</button>
-    <button type="input" class="btn btn-sm btn-default" value="Gomme" id="one">Gomme</button>
-    <button type="input" class="btn btn-sm btn-default" value="Pinceau" id="one">Pinceau</button>
-    <button type="input" class="btn btn-sm btn-default" value="Couleur" id="one">Couleur</button>
-    <button type="input" class="btn btn-xs btn-default" value="white" id="color">Blanc</button>
-    <button type="input" class="btn btn-xs" value="black" id="color">Noir</button>
-    <button type="input" class="btn btn-xs btn-primary" value="blue" id="color">Bleu</button>
-    <button type="input" class="btn btn-xs btn-success" value="green" id="color">Vert</button>
-    <button type="input" class="btn btn-xs btn-warning" value="orange" id="color">Orange</button>
-    <button type="input" class="btn btn-xs btn-danger" value="red" id="color">Rouge</button>
-
-
-    <div id="sketch">
-        <canvas id="myCanvas" width="600" height="600" style="border:1px solid black">    
-    
-    
-    
-    
-    
-    
-  </canvas>
     </div>
 
 
+    <canvas id="myCanvas" width="500" height="500" style="border:2px solid black">   
+  </canvas>
 
-    <script src="js/index.js"></script>
+
+    <div class="">
+        <button type="input" class="btn btn-sm btn-default" id="gomme">Gomme</button>
+        <button type="input" class="btn btn-sm btn-default" id="effacer">Effacer</button>
+
+    </div>
+
+
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="js/index.js"></script>
 
 </body>
 

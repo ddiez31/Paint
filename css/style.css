@@ -8,3 +8,17 @@ noir {
     background-color: gray;
     color: white;
 }
+
+#gomme,
+#effacer {
+    background-color: gray;
+    color: white;
+}
+
+.top1 {
+    display: inline-flex;
+}
+
+.fa-circle {
+    border: 1px solid black;
+}
