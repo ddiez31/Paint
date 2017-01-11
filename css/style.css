@@ -4,11 +4,7 @@ noir {
     color: white;
 }
 
-#one {
-    background-color: gray;
-    color: white;
-}
-
+#save,
 #gomme,
 #effacer {
     background-color: gray;
