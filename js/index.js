@@ -2,15 +2,11 @@ $(document).ready(function() {
 
     window.onload = function initCanvas() {
 
-        /*gestion souris*/
         var mouseOn = false;
         var lastX, lastY;
         ctx = $(this).attr("myCanvas").getContext("2d");
         rect = {};
-        drag = false;
-
-
-
+        circle = {};
 
 
         /*gestion couleur pinceau*/
@@ -22,42 +18,6 @@ $(document).ready(function() {
         pencil = "1";
         $('button#taille').click(function() {
             pencil = $(this).val();
-        });
-
-        /*gestion dessin libre*/
-        $('button#libre').click(function() {
-            $('#myCanvas').mousedown(function(e) {
-                mouseOn = true;
-                dessin(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, false);
-            });
-
-            $('#myCanvas').mousemove(function(e) {
-                if (mouseOn) {
-                    dessin(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, true);
-                }
-            });
-
-            $('#myCanvas').mouseup(function(e) {
-                mouseOn = false;
-            });
-            $('#myCanvas').mouseleave(function(e) {
-                mouseOn = false;
-            });
-
-            function dessin(x, y, isDown) {
-                if (isDown) {
-                    ctx.beginPath();
-                    ctx.strokeStyle = color;
-                    ctx.lineWidth = pencil;
-                    ctx.lineJoin = "round";
-                    ctx.moveTo(lastX, lastY);
-                    ctx.lineTo(x, y);
-                    ctx.closePath();
-                    ctx.stroke();
-                }
-                lastX = x;
-                lastY = y;
-            };
         });
 
         /*gestion couleur background*/
@@ -84,40 +44,68 @@ $(document).ready(function() {
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         });
 
+        /*gestion dessin libre*/
+        $('button#libre').click(function() {
+            $('#myCanvas').mousedown(function(e) {
+                mouseOn = true;
+                dessin(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false);
+            });
+
+            $('#myCanvas').mousemove(function(e) {
+                if (mouseOn) {
+                    dessin(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+                }
+            });
+
+            $('#myCanvas').mouseup(function(e) {
+                mouseOn = false;
+            });
+            $('#myCanvas').mouseleave(function(e) {
+                mouseOn = false;
+            });
+
+            function dessin(x, y, isDown) {
+                if (isDown) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = pencil;
+                    ctx.lineJoin = "round";
+                    ctx.moveTo(lastX, lastY);
+                    ctx.lineTo(x, y);
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+                lastX = x;
+                lastY = y;
+            };
+        });
+
         /*gestion rectangle*/
         $('button#rectangle').click(function() {
             $('#myCanvas').mousedown(function(e) {
                 rect.startX = e.pageX - this.offsetLeft;
                 rect.startY = e.pageY - this.offsetTop;
-                drag = true;
-                /* mouseOn = true;
-                 rectangle(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, false);*/
+                mouseOn = true;
             });
 
             $('#myCanvas').mousemove(function(e) {
-                if (drag) {
+                if (mouseOn) {
                     rect.w = (e.pageX - this.offsetLeft) - rect.startX;
                     rect.h = (e.pageY - this.offsetTop) - rect.startY;
-
                 }
-                /*if (mouseOn) {
-                    rectangle(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, true);
-                }*/
             });
 
             $('#myCanvas').mouseup(function(e) {
                 rect.endX = e.pageX - this.offsetLeft;
                 rect.endY = e.pageY - this.offsetTop;
-                draw();
-                drag = false;
-                /*mouseOn = false;*/
+                rectangle();
+                mouseOn = false;
             });
             $('#myCanvas').mouseleave(function(e) {
-                drag = false;
-                /*mouseOn = false;*/
+                mouseOn = false;
             });
 
-            function draw() {
+            function rectangle() {
                 ctx.beginPath();
                 ctx.strokeStyle = color;
                 ctx.lineWidth = pencil;
@@ -126,9 +114,66 @@ $(document).ready(function() {
                 ctx.closePath();
                 ctx.stroke();
             };
-
-
         });
+
+        /*gestion cercle*/
+        $('button#cercle').click(function() {
+            $('#myCanvas').mousedown(function(e) {
+                circle.startX = e.pageX - this.offsetLeft;
+                circle.startY = e.pageY - this.offsetTop;
+                mouseOn = true;
+            });
+
+            $('#myCanvas').mousemove(function(e) {
+                if (mouseOn) {
+                    circle.w = (e.pageX - this.offsetLeft) - circle.startX;
+                    circle.h = (e.pageY - this.offsetTop) - circle.startY;
+                }
+            });
+
+            $('#myCanvas').mouseup(function(e) {
+                circle.endX = e.pageX - this.offsetLeft;
+                circle.endY = e.pageY - this.offsetTop;
+                cercle();
+                mouseOn = false;
+            });
+
+            $('#myCanvas').mouseleave(function(e) {
+                mouseOn = false;
+            });
+
+            function cercle() {
+                rayon = Math.sqrt(Math.pow((circle.startX - circle.endX), 2) + Math.pow((circle.startY - circle.endY), 2));
+                ctx.beginPath();
+                ctx.strokeStyle = color;
+                ctx.lineWidth = pencil;
+                ctx.lineJoin = "round";
+                ctx.arc(circle.startX, circle.startY, rayon, 0, Math.PI * 2, true);
+                ctx.closePath();
+                ctx.stroke();
+            }
+        });
+
+        /*gestion enregistrer*/
+        $('button#save').click(function() {
+            function saveImage() {
+                var ua = window.navigator.userAgent;
+                if (ua.indexOf("Chrome") > 0) {
+                    // save image without file type
+                    var canvas = $('#myCanvas');
+                    document.location.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+
+                    // save image as png
+                    var link = document.createElement('a');
+                    link.download = "image.png";
+                    link.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");;
+                    link.click();
+                } else {
+                    alert("Veuillez utiliser le navigateur Chrome");
+                }
+            };
+        });
+
 
 
 
