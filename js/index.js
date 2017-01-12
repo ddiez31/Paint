@@ -8,7 +8,6 @@ $(document).ready(function() {
         rect = {};
         circle = {};
 
-
         /*gestion couleur pinceau*/
         $('button#color').click(function() {
             color = $(this).val();
@@ -89,6 +88,42 @@ $(document).ready(function() {
             });
 
             function dessin(x, y, isDown) {
+                if (isDown) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = pencil;
+                    ctx.lineJoin = "round";
+                    ctx.moveTo(lastX, lastY);
+                    ctx.lineTo(x, y);
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+                lastX = x;
+                lastY = y;
+            };
+        });
+
+        /*gestion effacer*/
+        $('button#effacer').click(function effacer() {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        });
+
+        /*gestion trait*/
+        $('button#trait').click(function() {
+            $('#myCanvas').mousedown(function(e) {
+                mouseOn = true;
+                ligne(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false);
+            });
+
+            $('#myCanvas').mouseup(function(e) {
+                ligne(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+                mouseOn = false;
+            });
+            $('#myCanvas').mouseleave(function(e) {
+                mouseOn = false;
+            });
+
+            function ligne(x, y, isDown) {
                 if (isDown) {
                     ctx.beginPath();
                     ctx.strokeStyle = color;
