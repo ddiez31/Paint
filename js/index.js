@@ -155,29 +155,12 @@ $(document).ready(function() {
         });
 
         /*gestion enregistrer*/
-        $('button#save').click(function() {
-            function saveImage() {
-                var ua = window.navigator.userAgent;
-                if (ua.indexOf("Chrome") > 0) {
-                    // save image without file type
-                    var canvas = $('#myCanvas');
-                    document.location.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-
-                    // save image as png
-                    var link = document.createElement('a');
-                    link.download = "image.png";
-                    link.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");;
-                    link.click();
-                } else {
-                    alert("Veuillez utiliser le navigateur Chrome");
-                }
-            };
+        $("#save").click(function() {
+            window.localStorage.canvasImage = myCanvas.toDataURL();
+            var link = document.createElement('a');
+            link.download = "image.png";
+            link.href = myCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            link.click();
         });
-
-
-
-
-
-
     };
 });
