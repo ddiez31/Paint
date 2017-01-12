@@ -21,6 +21,7 @@ $(document).ready(function() {
         });
 
         /*gestion couleur background*/
+        bgcolor = "white";
         $('button#bgcolor').click(function() {
             bgcolor = $(this).val();
             ctx.fillStyle = bgcolor;
@@ -28,15 +29,38 @@ $(document).ready(function() {
         });
 
         /*gestion gomme*/
-        $('button#gomme').click(function efface(x, y, isDown) {
-            ctx.beginPath();
-            ctx.strokeStyle = bgcolor;
-            ctx.lineWidth = pencil;
-            ctx.lineJoin = "round";
-            ctx.moveTo(lastX, lastY);
-            ctx.lineTo(x, y);
-            ctx.closePath();
-            ctx.stroke();
+        $('button#gomme').click(function() {
+            $('#myCanvas').mousedown(function(e) {
+                mouseOn = true;
+                erase(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false);
+            });
+
+            $('#myCanvas').mousemove(function(e) {
+                if (mouseOn) {
+                    erase(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+                }
+            });
+
+            $('#myCanvas').mouseup(function(e) {
+                mouseOn = false;
+            });
+            $('#myCanvas').mouseleave(function(e) {
+                mouseOn = false;
+            });
+
+            function erase(x, y, isDown) {
+                if (isDown) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = bgcolor;
+                    ctx.lineWidth = "7";
+                    ctx.moveTo(lastX, lastY);
+                    ctx.lineTo(x, y);
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+                lastX = x;
+                lastY = y;
+            };
         });
 
         /*gestion effacer*/
