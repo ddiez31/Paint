@@ -2,12 +2,98 @@ $(document).ready(function() {
 
     window.onload = function initCanvas() {
 
-        var mouseOn = false;
-        var lastX, lastY;
-        var tool;
+        /*variables*/
         ctx = $(this).attr("myCanvas").getContext("2d");
-        rect = {};
-        circle = {};
+        var mouseOn = false;
+        var startX, startY;
+        var midX, midY;
+        var endX, endY;
+        var tool;
+        var color;
+        var pencil = "1";
+        var bgcolor = "white";
+
+        /*fonction souris*/
+        function souris() {
+            $('#myCanvas').mousedown(function(e) {
+                mouseOn = true;
+                startX = e.pageX - this.offsetLeft;
+                startY = e.pageY - this.offsetTop;
+            });
+
+            $('#myCanvas').mousemove(function(e) {
+                if (tool == "libre") {
+                    endX = e.pageX - this.offsetLeft;
+                    endY = e.pageY - this.offsetTop;
+                    dessin();
+
+                } else {
+                    midX = (e.pageX - this.offsetLeft) - startX;
+                    midY = (e.pageY - this.offsetTop) - startY;
+                };
+            });
+
+            $('#myCanvas').mouseup(function(e) {
+                if (tool == "libre") {
+                    mouseOn = false;
+                } else {
+                    endX = e.pageX - this.offsetLeft;
+                    endY = e.pageY - this.offsetTop;
+                    dessin();
+                    mouseOn = false;
+                }
+            });
+
+            $('#myCanvas').mouseleave(function(e) {
+                mouseOn = false;
+            });
+        };
+
+        /*fonction dessin*/
+        function dessin() {
+            if (tool == "cercle") {
+                rayon = Math.sqrt(Math.pow((startX - endX), 2) + Math.pow((startY - endY), 2));
+                ctx.beginPath();
+                ctx.strokeStyle = color;
+                ctx.lineWidth = pencil;
+                ctx.lineJoin = "round";
+                ctx.arc(startX, startY, rayon, 0, Math.PI * 2, true);
+                ctx.closePath();
+                ctx.stroke();
+
+            } else if (tool == "rectangle") {
+                ctx.beginPath();
+                ctx.strokeStyle = color;
+                ctx.lineWidth = pencil;
+                ctx.lineJoin = "round";
+                ctx.strokeRect(startX, startY, midX, midY, endX, endY);
+                ctx.closePath();
+                ctx.stroke();
+
+            } else if (tool == "trait") {
+                ctx.beginPath();
+                ctx.strokeStyle = color;
+                ctx.lineWidth = pencil;
+                ctx.lineJoin = "round";
+                ctx.moveTo(startX, startY);
+                ctx.lineTo(endX, endY);
+                ctx.closePath();
+                ctx.stroke();
+
+            } else if (tool == "libre") {
+                ctx.beginPath();
+                ctx.strokeStyle = color;
+                ctx.lineWidth = pencil;
+                ctx.lineJoin = "round";
+                ctx.moveTo(startX, startY);
+                ctx.lineTo(endX, endY);
+                ctx.closePath();
+                ctx.stroke();
+
+            } else {
+                return false;
+            }
+        };
 
         /*gestion couleur pinceau*/
         $('button#color').click(function() {
@@ -15,13 +101,11 @@ $(document).ready(function() {
         });
 
         /*gestion taille pinceau*/
-        pencil = "1";
         $('button#taille').click(function() {
             pencil = $(this).val();
         });
 
         /*gestion couleur background*/
-        bgcolor = "white";
         $('button#bgcolor').click(function() {
             bgcolor = $(this).val();
             ctx.fillStyle = bgcolor;
@@ -72,137 +156,16 @@ $(document).ready(function() {
         $('button#bouton').click(function() {
             tool = $(this).data('tools');
             if (tool == "cercle") {
-                $('#myCanvas').mousedown(function(e) {
-                    circle.startX = e.pageX - this.offsetLeft;
-                    circle.startY = e.pageY - this.offsetTop;
-                    mouseOn = true;
-                });
-
-                $('#myCanvas').mousemove(function(e) {
-                    if (mouseOn) {
-                        circle.w = (e.pageX - this.offsetLeft) - circle.startX;
-                        circle.h = (e.pageY - this.offsetTop) - circle.startY;
-                    }
-                });
-
-                $('#myCanvas').mouseup(function(e) {
-                    circle.endX = e.pageX - this.offsetLeft;
-                    circle.endY = e.pageY - this.offsetTop;
-                    cercle();
-                    mouseOn = false;
-                });
-
-                $('#myCanvas').mouseleave(function(e) {
-                    mouseOn = false;
-                });
-
-                function cercle() {
-                    rayon = Math.sqrt(Math.pow((circle.startX - circle.endX), 2) + Math.pow((circle.startY - circle.endY), 2));
-                    ctx.beginPath();
-                    ctx.strokeStyle = color;
-                    ctx.lineWidth = pencil;
-                    ctx.lineJoin = "round";
-                    ctx.arc(circle.startX, circle.startY, rayon, 0, Math.PI * 2, true);
-                    ctx.closePath();
-                    ctx.stroke();
-                }
+                souris();
 
             } else if (tool == "rectangle") {
-                $('#myCanvas').mousedown(function(e) {
-                    rect.startX = e.pageX - this.offsetLeft;
-                    rect.startY = e.pageY - this.offsetTop;
-                    mouseOn = true;
-                });
-
-                $('#myCanvas').mousemove(function(e) {
-                    if (mouseOn) {
-                        rect.w = (e.pageX - this.offsetLeft) - rect.startX;
-                        rect.h = (e.pageY - this.offsetTop) - rect.startY;
-                    }
-                });
-
-                $('#myCanvas').mouseup(function(e) {
-                    rect.endX = e.pageX - this.offsetLeft;
-                    rect.endY = e.pageY - this.offsetTop;
-                    rectangle();
-                    mouseOn = false;
-                });
-                $('#myCanvas').mouseleave(function(e) {
-                    mouseOn = false;
-                });
-
-                function rectangle() {
-                    ctx.beginPath();
-                    ctx.strokeStyle = color;
-                    ctx.lineWidth = pencil;
-                    ctx.lineJoin = "round";
-                    ctx.strokeRect(rect.startX, rect.startY, rect.w, rect.h, rect.endX, rect.endY);
-                    ctx.closePath();
-                    ctx.stroke();
-                };
+                souris();
 
             } else if (tool == "trait") {
-                $('#myCanvas').mousedown(function(e) {
-                    mouseOn = true;
-                    ligne(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false);
-                });
+                souris();
 
-                $('#myCanvas').mouseup(function(e) {
-                    ligne(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
-                    mouseOn = false;
-                });
-                $('#myCanvas').mouseleave(function(e) {
-                    mouseOn = false;
-                });
-
-                function ligne(x, y, isDown) {
-                    if (isDown) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = color;
-                        ctx.lineWidth = pencil;
-                        ctx.lineJoin = "round";
-                        ctx.moveTo(lastX, lastY);
-                        ctx.lineTo(x, y);
-                        ctx.closePath();
-                        ctx.stroke();
-                    }
-                    lastX = x;
-                    lastY = y;
-                };
-
-            } else if (tool == "dessin") {
-                $('#myCanvas').mousedown(function(e) {
-                    mouseOn = true;
-                    dessin(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false);
-                });
-
-                $('#myCanvas').mousemove(function(e) {
-                    if (mouseOn) {
-                        dessin(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
-                    }
-                });
-
-                $('#myCanvas').mouseup(function(e) {
-                    mouseOn = false;
-                });
-                $('#myCanvas').mouseleave(function(e) {
-                    mouseOn = false;
-                });
-
-                function dessin(x, y, isDown) {
-                    if (isDown) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = color;
-                        ctx.lineWidth = pencil;
-                        ctx.lineJoin = "round";
-                        ctx.moveTo(lastX, lastY);
-                        ctx.lineTo(x, y);
-                        ctx.closePath();
-                        ctx.stroke();
-                    }
-                    lastX = x;
-                    lastY = y;
-                };
+            } else if (tool == "libre") {
+                souris();
 
             } else {
                 return false;
