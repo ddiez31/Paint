@@ -15,42 +15,43 @@
 </head>
 
 <body>
-    <div class="top1">
-        <button type="input" class="btn btn-sm btn-default" id="save">Enregistrer</button>
-        <div class="bgColor">
-            <span class="label label-default" id="one">Couleur background</span>
-            <button type="input" class="btn btn-xs btn-default" value="white" id="bgcolor">Blanc</button>
-            <button type="input" class="btn btn-xs" value="black" id="bgcolor">Noir</button>
-            <button type="input" class="btn btn-xs btn-primary" value="blue" id="bgcolor">Bleu</button>
-            <button type="input" class="btn btn-xs btn-success" value="green" id="bgcolor">Vert</button>
-            <button type="input" class="btn btn-xs btn-warning" value="orange" id="bgcolor">Orange</button>
-            <button type="input" class="btn btn-xs btn-danger" value="red" id="bgcolor">Rouge</button>
+    <div class="les3">
+        <div class="top1">
+
+            <div class="bgColor">
+                <span class="label label-default" id="one">Couleur background</span>
+                <button type="input" class="btn btn-xs btn-default" value="white" id="bgcolor">Blanc</button>
+                <button type="input" class="btn btn-xs" value="black" id="bgcolor">Noir</button>
+                <button type="input" class="btn btn-xs btn-primary" value="blue" id="bgcolor">Bleu</button>
+                <button type="input" class="btn btn-xs btn-success" value="green" id="bgcolor">Vert</button>
+                <button type="input" class="btn btn-xs btn-warning" value="orange" id="bgcolor">Orange</button>
+                <button type="input" class="btn btn-xs btn-danger" value="red" id="bgcolor">Rouge</button>
+            </div>
+        </div>
+        <div class="top2">
+            <span class="label label-default" id="one">Couleur pinceau</span>
+            <button type="input" class="btn btn-xs btn-default" value="white" id="color">Blanc</button>
+            <button type="input" class="btn btn-xs" value="black" id="color">Noir</button>
+            <button type="input" class="btn btn-xs btn-primary" value="blue" id="color">Bleu</button>
+            <button type="input" class="btn btn-xs btn-success" value="green" id="color">Vert</button>
+            <button type="input" class="btn btn-xs btn-warning" value="orange" id="color">Orange</button>
+            <button type="input" class="btn btn-xs btn-danger" value="red" id="color">Rouge</button>
+        </div>
+        <div class="top3">
+            <span class="label label-default" id="one">Taille pinceau</span>
+            <button type="input" class="btn btn-xs btn-default" value="1" id="taille">Petit</button>
+            <button type="input" class="btn btn-xs btn-default" value="5" id="taille">Moyen</button>
+            <button type="input" class="btn btn-xs btn-default" value="9" id="taille">Gros</button>
+            <button type="input" class="btn btn-xs btn-default" value="15" id="taille">Enorme</button>
+        </div>
+        <div class="top3">
+            <button type="input" class="btn btn-sm btn-default" data-tools="libre" id="bouton">Dessin libre</button>
+            <button type="input" class="btn btn-sm btn-default" data-tools="trait" id="bouton">Trait</button>
+            <button type="input" class="btn btn-sm btn-default" data-tools="rectangle" id="bouton">Rectangle</button>
+            <button type="input" class="btn btn-sm btn-default" data-tools="cercle" id="bouton">Cercle</button>
+
         </div>
     </div>
-    <div class="top2">
-        <span class="label label-default" id="one">Couleur pinceau</span>
-        <button type="input" class="btn btn-xs btn-default" value="white" id="color">Blanc</button>
-        <button type="input" class="btn btn-xs" value="black" id="color">Noir</button>
-        <button type="input" class="btn btn-xs btn-primary" value="blue" id="color">Bleu</button>
-        <button type="input" class="btn btn-xs btn-success" value="green" id="color">Vert</button>
-        <button type="input" class="btn btn-xs btn-warning" value="orange" id="color">Orange</button>
-        <button type="input" class="btn btn-xs btn-danger" value="red" id="color">Rouge</button>
-    </div>
-    <div class="top3">
-        <span class="label label-default" id="one">Taille pinceau</span>
-        <button type="input" class="btn btn-xs btn-default" value="1" id="taille">Petit</button>
-        <button type="input" class="btn btn-xs btn-default" value="5" id="taille">Moyen</button>
-        <button type="input" class="btn btn-xs btn-default" value="9" id="taille">Gros</button>
-        <button type="input" class="btn btn-xs btn-default" value="15" id="taille">Enorme</button>
-    </div>
-    <div class="top3">
-        <button type="input" class="btn btn-sm btn-default" value="false" id="libre">Dessin libre
-        <button type="input" class="btn btn-sm btn-default" id="trait">Trait</button>
-        <button type="input" class="btn btn-sm btn-default" id="rectangle">Rectangle</button>
-        <button type="input" class="btn btn-sm btn-default" id="cercle">Cercle</button>
-
-    </div>
-
 
     <canvas id="myCanvas" width="500" height="500" style="border:2px solid black">   
         </canvas>
@@ -59,7 +60,7 @@
     <div class="">
         <button type="input" class="btn btn-sm btn-default" id="gomme">Gomme</button>
         <button type="input" class="btn btn-sm btn-default" id="effacer">Effacer</button>
-
+        <button type="input" class="btn btn-sm btn-default" id="save">Enregistrer</button>
     </div>
 
 
