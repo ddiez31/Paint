@@ -16,16 +16,26 @@ $(document).ready(function() {
         /*fonction souris*/
         function souris() {
             $('#myCanvas').mousedown(function(e) {
-                mouseOn = true;
-                startX = e.pageX - this.offsetLeft;
-                startY = e.pageY - this.offsetTop;
+                if (tool == "libre") {
+                    mouseOn = true;
+                    startX = e.pageX - this.offsetLeft;
+                    startY = e.pageY - this.offsetTop;
+                    dessin();
+
+                } else {
+                    mouseOn = true;
+                    startX = e.pageX - this.offsetLeft;
+                    startY = e.pageY - this.offsetTop;
+                };
             });
 
             $('#myCanvas').mousemove(function(e) {
                 if (tool == "libre") {
-                    endX = e.pageX - this.offsetLeft;
-                    endY = e.pageY - this.offsetTop;
-                    dessin();
+                    if (mouseOn) {
+                        endX = e.pageX - this.offsetLeft;
+                        endY = e.pageY - this.offsetTop;
+                        dessin();
+                    }
 
                 } else {
                     midX = (e.pageX - this.offsetLeft) - startX;
@@ -36,16 +46,21 @@ $(document).ready(function() {
             $('#myCanvas').mouseup(function(e) {
                 if (tool == "libre") {
                     mouseOn = false;
+
                 } else {
                     endX = e.pageX - this.offsetLeft;
                     endY = e.pageY - this.offsetTop;
                     dessin();
-                    mouseOn = false;
                 }
             });
 
             $('#myCanvas').mouseleave(function(e) {
-                mouseOn = false;
+                if (tool == "libre") {
+                    mouseOn = false;
+
+                } else {
+                    mouseOn = false;
+                };
             });
         };
 
@@ -89,10 +104,7 @@ $(document).ready(function() {
                 ctx.lineTo(endX, endY);
                 ctx.closePath();
                 ctx.stroke();
-
-            } else {
-                return false;
-            }
+            };
         };
 
         /*gestion couleur pinceau*/
