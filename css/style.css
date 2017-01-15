@@ -1,7 +1,23 @@
+body {
+    background-image: url("../logosimplon.png");
+    background-repeat: no-repeat;
+    background-position-x: 1050px;
+    background-position-y: 150px;
+}
+
+#bouton {
+    background-color: darkslategray;
+    color: white;
+}
+
 .btn,
 noir {
     background-color: black;
     color: white;
+}
+
+h1 {
+    text-align: center;
 }
 
 #save,
@@ -12,8 +28,8 @@ noir {
 }
 
 .top1 {
-    display: inline-flex;
-    margin: 10px 5px 10px 5px;
+    display: block;
+    margin: 0 auto;
 }
 
 .fa-circle {
@@ -21,29 +37,48 @@ noir {
 }
 
 .top2 {
+    display: block;
     margin: 10px 5px 10px 5px;
-    display: inline-flex;
 }
 
 .top3 {
-    display: inline-flex;
-    margin: 10px 5px 10px 5px;
+    display: block;
+    margin: 10px 5px 10px 60px;
 }
 
 #myCanvas {
+    position: center;
     border: 5px solid grey;
     box-shadow: 5px 5px 30px black;
-    margin-top: 30px;
+    margin-top: -200px;
     margin-bottom: 30px;
+    margin-left: 450px;
 }
 
 .les3 {
+    float: left;
     background: #4f92ff;
-    width: 500px;
+    width: 400px;
+    height: 220px;
     margin-top: 20px;
     margin-left: 20px;
-    padding-left: 10px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    margin-right: 650px;
     border-radius: 20px;
+}
+
+.enbas {
+    margin-left: 150px;
+    margin-top: -250px;
+}
+
+#save {
+    background: purple;
+    margin-left: 25px;
+    margin-top: 50px;
+}
+
+.foot {
+    width: 300px;
+    margin-top: 140px;
+    margin-left: 550px;
 }

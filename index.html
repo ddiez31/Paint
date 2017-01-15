@@ -4,9 +4,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Paint</title>
+    <title>Paint Simplon</title>
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Font-Awesome CSS -->
@@ -16,17 +17,15 @@
 
 <body>
     <div class="les3">
+        <h1>ToolBox</h1>
         <div class="top1">
-
-            <div class="bgColor">
-                <span class="label label-default" id="one">Couleur background</span>
-                <button type="input" class="btn btn-xs btn-default" value="white" id="bgcolor">Blanc</button>
-                <button type="input" class="btn btn-xs" value="black" id="bgcolor">Noir</button>
-                <button type="input" class="btn btn-xs btn-primary" value="blue" id="bgcolor">Bleu</button>
-                <button type="input" class="btn btn-xs btn-success" value="green" id="bgcolor">Vert</button>
-                <button type="input" class="btn btn-xs btn-warning" value="orange" id="bgcolor">Orange</button>
-                <button type="input" class="btn btn-xs btn-danger" value="red" id="bgcolor">Rouge</button>
-            </div>
+            <span class="label label-default" id="one">Couleur background</span>
+            <button type="input" class="btn btn-xs btn-default" value="white" id="bgcolor">Blanc</button>
+            <button type="input" class="btn btn-xs" value="black" id="bgcolor">Noir</button>
+            <button type="input" class="btn btn-xs btn-primary" value="blue" id="bgcolor">Bleu</button>
+            <button type="input" class="btn btn-xs btn-success" value="green" id="bgcolor">Vert</button>
+            <button type="input" class="btn btn-xs btn-warning" value="orange" id="bgcolor">Orange</button>
+            <button type="input" class="btn btn-xs btn-danger" value="red" id="bgcolor">Rouge</button>
         </div>
         <div class="top2">
             <span class="label label-default" id="one">Couleur pinceau</span>
@@ -52,17 +51,20 @@
 
         </div>
     </div>
-
     <canvas id="myCanvas" width="500" height="500" style="border:2px solid black">   
         </canvas>
 
-
-    <div class="">
+    <div class="enbas">
         <button type="input" class="btn btn-sm btn-default" data-tools="gomme" id="gomme">Gomme</button>
         <button type="input" class="btn btn-sm btn-default" id="effacer">Effacer</button>
+        <br>
         <button type="input" class="btn btn-sm btn-default" id="save">Enregistrer</button>
     </div>
 
+    <div class="foot">
+        <span class="glyphicon glyphicon-copyright-mark"> 2017</span>
+        <h5>Tous droits réservés Lesly, Aymeric, David</h5>
+    </div>
 
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
