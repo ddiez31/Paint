@@ -120,8 +120,9 @@ $(document).ready(function() {
         /*gestion couleur background*/
         $('button#bgcolor').click(function() {
             bgcolor = $(this).val();
-            ctx.fillStyle = bgcolor;
-            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            if ($("#fondchange").is(':checked')) {
+                $('#myCanvas').css('background-color', bgcolor);
+            }
         });
 
         /*gestion gomme*/
